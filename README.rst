@@ -7,8 +7,8 @@ PI: G. Clayton
 In Development!
 ---------------
 
-Active devleopment.
-Data still in changing.
+Active development.
+Everything changing.
 Use at your own risk.
 
 Contributors
