@@ -12,7 +12,8 @@ if __name__ == '__main__':
                    'F814W', 'F110W', 'F160W']
 
     # read in the full BEAST sed file
-    fname = 'beast_example_phat_seds.grid.hd5'
+    # fname = 'beast_example_phat_seds.grid.hd5'
+    fname = 'BEAST/beast_phat_m33/beast_phat_m33_seds.grid.hd5'
     hdf_cache = h5py.File(fname, 'r')
 
     # for sname in hdf_cache.keys():
