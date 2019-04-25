@@ -43,9 +43,9 @@ def get_postage_catalog(radecstr,
 if __name__ == '__main__':
 
     # get the large fits file and wcs info
-    filenames = ['/home/kgordon/Hubble/M33Ext/14610_M33-B01_1.phot.fits.gz',
-                 '/home/kgordon/Hubble/M33Ext/14610_M33-B01_2.phot.fits.gz',
-                 '/home/kgordon/Hubble/M33Ext/merged-6filt-bricks23.fits.gz']
+    filenames = ['/home/kgordon/HST/M33-Ext/14610_M33-B01_1.phot.fits.gz',
+                 '/home/kgordon/HST/M33-Ext/14610_M33-B01_2.phot.fits.gz',
+                 '/home/kgordon/HST/M33-Ext/merged-6filt-bricks23.fits.gz']
     ftags = ['B01_2', 'B01_1', 'B23']
 
     # h, m, s have to be lower case for radecstr.  That is specific
@@ -67,6 +67,17 @@ if __name__ == '__main__':
                  '01h34m10.5900s +30d46m16.10s',
                  '01h33m34.2600s +30d33m27.60s']
 
+    # new set
+    starnames = ['J013341.93+304728_VX',
+                 'J013306.53+303010_VX',
+                 'J013340.10+304138_VX',
+                 'J013313.76+305240_VX']
+
+    radecstrs = ['01h33m41.93s +30d47m28.3s',
+                 '01h33m06.53s +30d20m10.8s',
+                 '01h33m40.10s +30d41m38.4s',
+                 '01h33m13.76s +30d52m40.1s']
+
     # size to extract in (ra, dec) arcsec
     size = (10./3600.)*u.degree
 
@@ -83,4 +94,5 @@ if __name__ == '__main__':
             print(pcat)
 
             if pcat is not None:
-                pcat.write('%s_%s_pcatalog.fits' % (starnames[i], ftags[k]))
+                pcat.write('%s_%s_pcatalog.fits' % (starnames[i], ftags[k]),
+                           overwrite=True)

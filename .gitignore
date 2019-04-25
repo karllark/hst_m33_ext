@@ -5,3 +5,6 @@ __pycache__*
 *~
 *.pyc
 *.png
+*.hd5
+BEAST*
+*.dat
