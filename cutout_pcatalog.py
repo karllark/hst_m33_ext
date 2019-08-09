@@ -43,9 +43,9 @@ def get_postage_catalog(radecstr,
 if __name__ == '__main__':
 
     # get the large fits file and wcs info
-    filenames = ['/home/kgordon/HST/M33-Ext/14610_M33-B01_1.phot.fits.gz',
-                 '/home/kgordon/HST/M33-Ext/14610_M33-B01_2.phot.fits.gz',
-                 '/home/kgordon/HST/M33-Ext/merged-6filt-bricks23.fits.gz']
+    filenames = ['/home/kgordon/Hubble/M33-Ext/14610_M33-B01_1.phot.fits.gz',
+                 '/home/kgordon/Hubble/M33-Ext/14610_M33-B01_2.phot.fits.gz',
+                 '/home/kgordon/Hubble/M33-Ext/merged-6filt-bricks23.fits.gz']
     ftags = ['B01_2', 'B01_1', 'B23']
 
     # h, m, s have to be lower case for radecstr.  That is specific
