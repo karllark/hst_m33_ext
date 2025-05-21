@@ -31,7 +31,7 @@ def mask_bad(cdata, cname):
     exreg = {
         "e1": None,
         "e2": None,
-        "e3": None,
+        "e3": [0.17, 0.2],
         "e4": None,
         "e5": None,
         "e6": None,
@@ -215,6 +215,7 @@ if __name__ == "__main__":
     sindxs = np.argsort(normvals)
     normvals = normvals[sindxs]
     extnames = np.array(extnames)[sindxs]
+    starnames = np.array(starnames)[sindxs]
 
     extdatas = []
     avs = []
