@@ -170,7 +170,7 @@ def main():
     exreg = {
         "e1": None,
         "e2": None,
-        "e3": None,
+        "e3": [0.17, 0.2],
         "e4": None,
         "e5": None,
         "e6": None,
@@ -235,8 +235,8 @@ def main():
     memod.logg.prior = (memod.logg.value, loggunc)
     memod.logg.bounds = [memod.logg.value - sfac*loggunc, memod.logg.value + sfac*loggunc]
 
-    memod.logZ.value = 0.0
-    memod.logZ.prior = (0.0, 0.2)
+    memod.logZ.value = -0.3
+    memod.logZ.prior = (-0.3, 0.2)
 
     # memod.C2.fixed = True
     # memod.B3.fixed = True
