@@ -13,7 +13,7 @@ def plot_set(
     extra_off_val=0.0,
     norm_wave_range=[0.26, 0.30] * u.micron,
     col_vals=["b", "g", "r", "m", "c", "y"],
-    ann_wave_range=[0.7, 0.9] * u.micron,
+    ann_wave_range=[0.3, 0.5] * u.micron,
     ann_rot=20.0,
     ann_offset=0.0,
     fontsize=18,
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     # fig, ax = pyplot.subplots(nrows=1, ncols=1, figsize=(10, 13))
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 11))
 
-    all = "m33_e1_j013250.80+303507 m33_e2_j013334.26+303327  m33_e3_j013339.52+304540 m33_e4_j013341.93+304728 m33_e5_j013344.59+304436 m33_e6_j013406.63+304147 m33_e8_j013416.10+303344"
+    all = "m33_e2_j013334.26+303327  m33_e3_j013339.52+304540 m33_e4_j013341.93+304728 m33_e5_j013344.59+304436 m33_e6_j013406.63+304147 m33_e8_j013416.10+303344"
 
     starnames = np.array(all.split())
 
