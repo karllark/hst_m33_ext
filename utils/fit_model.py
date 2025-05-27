@@ -183,7 +183,7 @@ def main():
         memod.add_exclude_region(np.flip(1.0 / (np.array(exreg[snum]) * u.micron)))
 
     # setup the relative band for the extinction curve
-    if snum in ["6"]:
+    if snum in ["e6"]:
         rel_band = "ACS_F814W"
     elif snum in ["e1", "e3", "e7"]:
         rel_band = "V"

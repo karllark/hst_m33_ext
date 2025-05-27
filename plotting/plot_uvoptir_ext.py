@@ -185,7 +185,7 @@ if __name__ == "__main__":
     parser.add_argument("--pdf", help="save figure as a pdf file", action="store_true")
     args = parser.parse_args()
 
-    all = "m33_e2_j013334.26+303327  m33_e3_j013339.52+304540 m33_e4_j013341.93+304728 m33_e5_j013344.59+304436"
+    all = "m33_e2_j013334.26+303327  m33_e3_j013339.52+304540 m33_e4_j013341.93+304728 m33_e5_j013344.59+304436 m33_e8_j013416.10+303344"
 
     starnames = np.array(all.split())
 
