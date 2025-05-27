@@ -80,11 +80,11 @@ def main():
     reddened_star = StarData(fstarname, path=f"{args.path}", only_bands=only_bands)
 
     # read in the foreground HI values
-    # htab = QTable.read("data/hi_foregrounds_m31_id.fits")
-    # gvals = args.starname.split("_")[1] == htab["star"]
-    # forehi = htab["nhi"][gvals][0] * 1e20
-    # forehi_unc = htab["nhi_err"][gvals][0] * 1e20
-    forehi = 10 ** 20.81
+    htab = QTable.read("data/m33_nhi_foreground_hi4pi.fits")
+    ename = (args.starname.split("_")[2]).upper()
+    gvals = [ename in cname for cname in htab["name"]]
+    forehi = htab["nhi"][gvals][0]
+    forehi_unc = htab["nhi_err"][gvals][0]
 
     # remove low S/N STIS data - affected by systematics
     sn_cut = 1.5
