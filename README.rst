@@ -52,7 +52,7 @@ Figures
 6. A(V) and main FM90 parameters versus N(HI)/A(V): uses the the extinction_ensemble package
    with `plot_many_param_vs_param.py --gdprops --datasets GCC09 G03_lmc G24_smc C25_m31 G25_m33`
 
-7. Average SMC extinction curve: `plotting/plot_m31ave.py`
+7. Average M33 extinction curve: `plotting/plot_m33ave.py`
 
 Tables
 ------
