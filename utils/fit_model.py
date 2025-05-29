@@ -56,6 +56,7 @@ def fit_model_parser():
     parser.add_argument(
         "--mcmc_nsteps", help="number of MCMC steps", default=1000, type=int
     )
+    parser.add_argument("--mcmc_resume", help="resume EMCEE MCMC fitting from saved file", action="store_true")
     parser.add_argument(
         "--showfit", help="display the best fit model plot", action="store_true"
     )
@@ -208,8 +209,8 @@ def main():
     # setup HI values
     memod.logHI_exgal.value = np.log10(1.61e21 * memod.Av.value)
     memod.logHI_exgal.fixed = False
-    memod.vel_exgal.value = -10.0
-    memod.vel_exgal.fixed = False
+    memod.vel_exgal.value = -180.0
+    memod.vel_exgal.fixed = True
 
     memod.logHI_MW.value = np.log10(forehi)
     memod.fore_Av.value = forehi / (8.3e21 / 3.1)
@@ -217,7 +218,7 @@ def main():
     memod.vel_MW.fixed = True
 
     # set velocities to non-zero to help fitting
-    memod.velocity.value = -300.0
+    memod.velocity.value = -180.0
     memod.velocity.fixed = True
 
     # for M31
@@ -288,6 +289,7 @@ def main():
             modinfo,
             nsteps=args.mcmc_nsteps,
             save_samples=f"{outname.replace("figs", "exts")}_.h5",
+            resume=args.mcmc_resume,
         )
 
         print("finished sampling")
