@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from astropy.table import QTable
 import astropy.units as u
 
-from dust_extinction.averages import G03_LMCAvg, G03_LMC2, G24_SMCAvg
+from dust_extinction.averages import G03_LMCAvg, G24_SMCAvg, C25_M31Avg
 from dust_extinction.parameter_averages import G23
 
 from measure_extinction.extdata import ExtData, AverageExtData
@@ -89,9 +89,10 @@ if __name__ == "__main__":
     ax.plot(
         mod_x,
         mod(mod_x),
-        "k:",
+        color="k",
+        linestyle=(0, (1, 3)),
         alpha=0.75,
-        label=f"Milky Way: G23 R(V)={rv:.2f}",
+        label=f"G23 R(V)={rv:.2f}",
         linewidth=3.0,
     )
 
@@ -103,7 +104,7 @@ if __name__ == "__main__":
         mod(mod_x),
         "k--",
         alpha=0.5,
-        label=f"Milky Way: G23 R(V)={rv:.2f}",
+        label=f"MW Average: G23 R(V)={rv:.2f}",
         linewidth=3.0,
     )
 
@@ -113,19 +114,9 @@ if __name__ == "__main__":
         mod_x,
         mod(mod_x),
         color="tab:orange",
-        linestyle="--",
+        linestyle=(0, (1, 1)),
         alpha=0.5,
         label=f"LMC Average: G03",
-        linewidth=3.0,
-    )
-
-    mod = G03_LMC2()
-    ax.plot(
-        mod_x,
-        mod(mod_x),
-        "c--",
-        alpha=0.5,
-        label=f"LMC2 Supershell: G03",
         linewidth=3.0,
     )
 
@@ -133,9 +124,21 @@ if __name__ == "__main__":
     ax.plot(
         mod_x,
         mod(mod_x),
-        "b--",
+        color="b",
+        linestyle=(5, (10, 3)),
         alpha=0.5,
         label=f"SMC Average: G24",
+        linewidth=3.0,
+    )
+
+    mod = C25_M31Avg()
+    ax.plot(
+        mod_x,
+        mod(mod_x),
+        color="g",
+        linestyle=(0, (3, 1, 1, 1)),
+        alpha=0.5,
+        label=f"M31 Average: C25",
         linewidth=3.0,
     )
 

@@ -18,9 +18,7 @@ if __name__ == "__main__":
     parser.add_argument("--pdf", help="save figure as a pdf file", action="store_true")
     args = parser.parse_args()
 
-    filename = (
-        "~/Spitzer/M33/final_data/m33_mips24_map1234_kdg_19nov08.fits"
-    )
+    filename = "~/Spitzer/M33/final_data/m33_mips24_map1234_kdg_19nov08.fits"
 
     hdu = fits.open(filename)[0]
     data = hdu.data
@@ -59,9 +57,9 @@ if __name__ == "__main__":
     ax.set_xlabel("RA")
     ax.set_ylabel("DEC")
 
-    fnames = ["all"]
-    fsyms = ["o"]
-    fcols = ["b"]
+    fnames = ["bad", "good"]
+    fsyms = ["o", "s"]
+    fcols = ["blue", "fuchsia"]
 
     names = []
     for cname, csym, ccol in zip(fnames, fsyms, fcols):
@@ -78,7 +76,7 @@ if __name__ == "__main__":
                 coord.ra.degree,
                 coord.dec.degree,
                 transform=ax.get_transform("fk5"),
-                s=30,
+                s=40,
                 edgecolor=ccol,
                 facecolor="none",
                 linewidth=2,
@@ -88,7 +86,14 @@ if __name__ == "__main__":
 
             # print(ptab["name"][k], wcs.world_to_pixel(coord))
             if args.names:
-                ax.annotate(f" {ptab["name"][k]}", wcs.world_to_pixel(coord), color=ccol, alpha=0.75)
+                ax.annotate(
+                    f" {ptab["name"][k]}",
+                    wcs.world_to_pixel(coord),
+                    color=ccol,
+                    alpha=1.0,
+                    rotation=0.0,
+                    va="center",
+                )
 
     legend_elements = [
         Line2D(
@@ -106,8 +111,8 @@ if __name__ == "__main__":
 
     ax.annotate(r"MIPS 24 $\mu$m", (100, 100))
 
-    #ax.annotate(r"Wing", (3000, 500), fontsize=1.5*fontsize, alpha=0.5)
-    #ax.annotate(r"Bar", (5000, 3800), fontsize=1.5*fontsize, alpha=0.5)
+    # ax.annotate(r"Wing", (3000, 500), fontsize=1.5*fontsize, alpha=0.5)
+    # ax.annotate(r"Bar", (5000, 3800), fontsize=1.5*fontsize, alpha=0.5)
 
     plt.tight_layout()
 

@@ -68,3 +68,4 @@ Tables
 5. Column parameters: utils/create_param_table.py
 
 6. FM90 parameters: utils/create_param_table.py. 
+   For M33 average values, `utils/fit_ave_fm90`.
