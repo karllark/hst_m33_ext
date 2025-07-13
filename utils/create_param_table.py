@@ -104,7 +104,8 @@ if __name__ == "__main__":
                         sunc = unc
                         val = 10**val
                         unc *= np.log(10.0) * val
-                        if unc / val > 0.5:
+                        if unc / val > 0.75:
+                            print("yep", val, unc)
                             val = 0.0
                             unc = 0.0
                             rdata_lat.append(rf"\nodata")

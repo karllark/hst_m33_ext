@@ -171,7 +171,8 @@ def main():
     exreg = {
         "e1": None,
         "e2": None,
-        "e3": [0.17, 0.2],
+        # "e3": [0.17, 0.2],
+        "e3": None,
         "e4": None,
         "e5": None,
         "e6": None,
