@@ -206,6 +206,7 @@ def main():
         memod.windalpha.fixed = False
 
     memod.Av.value = args.Av_init
+    memod.Rv.bounds = [1.5, 7.0]
 
     # setup HI values
     memod.logHI_exgal.value = np.log10(1.61e21 * memod.Av.value)
