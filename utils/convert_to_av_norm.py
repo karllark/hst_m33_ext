@@ -23,11 +23,14 @@ if __name__ == "__main__":
 
         if edata.type_rel_band != "V":
             print(cname, edata.columns["RV"][0], edata.type_rel_band)
-            af475w_av = emod(0.477217 * u.micron)
+            if edata.type_rel_band == "ACS_F814W":
+                refwave_av = emod(0.802932 * u.micron)
+            else:
+                refwave_av = emod(0.477217 * u.micron)
             av = edata.columns["AV"][0]
 
             for ckey in edata.exts.keys():
-                edata.exts[ckey] += (af475w_av - 1.0) * av
+                edata.exts[ckey] += (refwave_av - 1.0) * av
 
             edata.type_rel_band = "V"
 
