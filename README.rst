@@ -42,7 +42,7 @@ Figures
 
 2. Spectra stack: `plotting/plot_spec_stack.py`
 
-3. Example fit: `meplot_model m33_e5_j013344.59+304436 --obspath ~/Python/extstar_data/M33/ --picmodname _modinfo.p``
+3. Example fit: `meplot_model m33_e5_j013344.59+304436 --obspath ~/Python/extstar_data/M33/ --picmodname _modinfo.p`
 
 4. Extinction stack: `plotting/plot_uvoptir_ext.py --rebin_fac 5`
 
