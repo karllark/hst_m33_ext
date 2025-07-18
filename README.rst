@@ -26,7 +26,7 @@ Extinction Curves
 
 Extinction curves created by running the `fitstars` bash script.  This fits the
 STIS spectra and the available photometry (mostly HST) using `utils/fit_model.py`.
-The foreground extinction is inlcuded in the fitting using the MW velocity integrated
+The foreground extinction is included in the fitting using the MW velocity integrated
 HI columns converted to A(V) using the high-latitude N(HI)/A(V) ratio and a R(V) = 3.1
 is assumed.
 

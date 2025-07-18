@@ -15,11 +15,13 @@ if __name__ == "__main__":
             name = line.rstrip()
             starnames.append(name)
 
+    emod = G23()
+    emod.Rv_range = [1.5, 7.0]
     for cname in starnames:
         cfile = f"exts/{cname}_mefit_ext.fits"
         edata = ExtData(filename=cfile)
 
-        emod = G23(Rv=edata.columns["RV"][0])
+        emod.Rv = edata.columns["RV"][0]
 
         if edata.type_rel_band != "V":
             print(cname, edata.columns["RV"][0], edata.type_rel_band)
