@@ -114,7 +114,7 @@ if __name__ == "__main__":
                     elif ccol in ["fore_Av", "logHI_MW"]:
                         rdata_lat.append(rf"${val:.2f}$")
                     else:
-                        rdata_lat.append(rf"${val:.2f} \pm {unc:.2f}$")
+                        rdata_lat.append(rf"${val:.3f} \pm {unc:.3f}$")
                     if ccol not in ["fore_Av", "logHI_MW"]:
                         rdata.append(val)
                         rdata.append(unc)
