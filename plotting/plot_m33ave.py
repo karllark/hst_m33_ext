@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     aveext.save(ofilename)
 
-    mod_x = np.arange(0.5, 9.0, 0.1)
+    mod_x = np.arange(0.5, 9.0, 0.1) / u.micron
 
     aveext.plot(
         ax,
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     aveext.save(ofilename.replace(".fits", "res25.fits"))
 
     ax.set_ylim(0.0, 7.0)
-    ax.legend(loc="upper left", fontsize=0.8*fontsize)
+    ax.legend(loc="upper left", fontsize=0.8*fontsize, handlelength=4.0)
 
     fig.tight_layout()
 

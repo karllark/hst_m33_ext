@@ -47,9 +47,9 @@ if __name__ == "__main__":
 
         otab_lat3 = QTable(
             # fmt: off
-            names=("Name", r"$\log(T_\mathrm{eff})$", r"$\log(g)$", r"$\log(Z)$",
+            names=("Name", r"$\log(T_\mathrm{eff})$", r"$T_\mathrm{eff}$", r"$\log(g)$", r"$\log(Z)$",
                    r"$v_\mathrm{vturb}$"),
-            dtype=("S", "S", "S", "S", "S")
+            dtype=("S", "S", "S", "S", "S", "S")
             # fmt:on
         )
 
@@ -141,6 +141,12 @@ if __name__ == "__main__":
                     else:
                         tstr = rf"${val:.2f} \pm {unc:.2f}$"
                     rdata_lat3.append(tstr)
+                    if ccol == "logTeff":
+                        teff_mm = np.array([10**(val + unc), 10**(val - unc)])
+                        teff = int(np.average(teff_mm))
+                        teff_unc = int(0.5 * (teff_mm[0] - teff_mm[1]))
+                        tstr = rf"${teff} \pm {teff_unc}$"
+                        rdata_lat3.append(tstr)
                 otab_lat3.add_row(rdata_lat3)
 
                 otab.add_row(rdata)
@@ -176,7 +182,7 @@ if __name__ == "__main__":
         otab_lat3.write(
             f"tables/{basestr}{ctype}_ensemble_stell_params.tex",
             format="aastex",
-            col_align="lcccc",
+            col_align="lccccc",
             latexdict={
                 "caption": r"Stellar Parameters \label{tab_ext_stell_params}",
             },
