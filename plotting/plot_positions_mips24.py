@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     fnames = ["bad", "good"]
     fsyms = ["o", "s"]
-    fcols = ["blue", "fuchsia"]
+    fcols = ["blue", "lightgreen"]
 
     names = []
     for cname, csym, ccol in zip(fnames, fsyms, fcols):
@@ -76,23 +76,31 @@ if __name__ == "__main__":
                 coord.ra.degree,
                 coord.dec.degree,
                 transform=ax.get_transform("fk5"),
-                s=40,
+                s=60,
                 edgecolor=ccol,
-                facecolor="none",
+                facecolor=ccol,
                 linewidth=2,
-                alpha=0.75,
+                #alpha=0.75,
                 marker=csym,
             )
 
             # print(ptab["name"][k], wcs.world_to_pixel(coord))
             if args.names:
+                if ptab["name"][k] == "e5":
+                    va = "top"
+                elif ptab["name"][k] == "e4":
+                    va = "bottom"
+                else:
+                    va = "center"
                 ax.annotate(
                     f" {ptab["name"][k]}",
                     wcs.world_to_pixel(coord),
                     color=ccol,
                     alpha=1.0,
                     rotation=0.0,
-                    va="center",
+                    va=va,
+                    fontsize=20,
+                    fontweight="bold"
                 )
 
     legend_elements = [
