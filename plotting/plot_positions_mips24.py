@@ -14,6 +14,7 @@ from astropy.visualization import SqrtStretch, ImageNormalize
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--names", help="annotate with star names", action="store_true")
+    parser.add_argument("--onlygood", help="only plot the good sightlines", action="store_true")
     parser.add_argument("--png", help="save figure as a png file", action="store_true")
     parser.add_argument("--pdf", help="save figure as a pdf file", action="store_true")
     args = parser.parse_args()
@@ -57,9 +58,14 @@ if __name__ == "__main__":
     ax.set_xlabel("RA")
     ax.set_ylabel("DEC")
 
-    fnames = ["bad", "good"]
-    fsyms = ["o", "s"]
-    fcols = ["blue", "lightgreen"]
+    if args.onlygood:
+        fnames = ["good"]
+        fsyms = ["s"]
+        fcols = ["magenta"]
+    else:
+        fnames = ["good", "bad"]
+        fsyms = ["s", "o"]
+        fcols = ["magenta", "tab:orange"]
 
     names = []
     for cname, csym, ccol in zip(fnames, fsyms, fcols):
@@ -125,6 +131,8 @@ if __name__ == "__main__":
     plt.tight_layout()
 
     save_str = "figs/m33_mips24_positions"
+    if args.onlygood:
+        save_str = f"{save_str}_onlygood"
     if args.png:
         plt.savefig(f"{save_str}.png")
     elif args.pdf:
