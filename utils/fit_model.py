@@ -56,7 +56,11 @@ def fit_model_parser():
     parser.add_argument(
         "--mcmc_nsteps", help="number of MCMC steps", default=1000, type=int
     )
-    parser.add_argument("--mcmc_resume", help="resume EMCEE MCMC fitting from saved file", action="store_true")
+    parser.add_argument(
+        "--mcmc_resume",
+        help="resume EMCEE MCMC fitting from saved file",
+        action="store_true",
+    )
     parser.add_argument(
         "--showfit", help="display the best fit model plot", action="store_true"
     )
@@ -215,7 +219,17 @@ def main():
     memod.vel_exgal.fixed = True
 
     memod.logHI_MW.value = np.log10(forehi)
-    memod.fore_Av.value = forehi / (8.3e21 / 3.1)
+    fore_nhiebv = 8.3e21
+    # unc from slope fit given in Fig. 1 of Liszt 2014
+    fore_nhiebv_unc = fore_nhiebv * (0.011 / 0.960)
+    fore_Av = forehi / (fore_nhiebv / memod.fore_Rv.prior[0])
+    fore_Av_unc = (
+        (forehi_unc / forehi) ** 2
+        + (memod.fore_Rv.prior[1] / memod.fore_Rv.prior[0]) ** 2
+        + (fore_nhiebv_unc / fore_nhiebv) ** 2
+    )
+    memod.fore_Av.value = fore_Av
+    memod.fore_Av.prior = (fore_Av, fore_Av_unc)
     memod.logHI_MW.fixed = True
     memod.vel_MW.fixed = True
 
@@ -231,12 +245,18 @@ def main():
     logTeffunc = 0.025
     sfac = 3.0
     memod.logTeff.prior = (memod.logTeff.value, logTeffunc)
-    memod.logTeff.bounds = [memod.logTeff.value - sfac*logTeffunc, memod.logTeff.value + sfac*logTeffunc]
+    memod.logTeff.bounds = [
+        memod.logTeff.value - sfac * logTeffunc,
+        memod.logTeff.value + sfac * logTeffunc,
+    ]
 
     memod.logg.fixed = False
     loggunc = 0.1
     memod.logg.prior = (memod.logg.value, loggunc)
-    memod.logg.bounds = [memod.logg.value - sfac*loggunc, memod.logg.value + sfac*loggunc]
+    memod.logg.bounds = [
+        memod.logg.value - sfac * loggunc,
+        memod.logg.value + sfac * loggunc,
+    ]
 
     memod.logZ.value = -0.3
     memod.logZ.prior = (-0.3, 0.2)
@@ -283,6 +303,8 @@ def main():
     plt.close()
 
     if args.mcmc:
+        fitmod.fore_sampling = True
+
         print("starting sampling")
         # using an MCMC sampler to define nD probability function
         # use best fit result as the starting point
