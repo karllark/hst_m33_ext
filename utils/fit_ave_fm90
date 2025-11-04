@@ -5,7 +5,7 @@ extargs="--png --nsteps=5000 --burnfrac=0.2"
 # extargs="--png"
 fmfit="python utils/fit_uv_ext_fm90.py"
 
-rm -f fits/*FM90.h5
+rm -f exts/*FM90.h5
 
 # averages
 $fmfit exts/m33_ext.fits $extargs
