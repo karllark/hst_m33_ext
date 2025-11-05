@@ -223,13 +223,15 @@ def main():
     # unc from slope fit given in Fig. 1 of Liszt 2014
     fore_nhiebv_unc = fore_nhiebv * (0.011 / 0.960)
     fore_Av = forehi / (fore_nhiebv / memod.fore_Rv.prior[0])
-    fore_Av_unc = (
+    fore_Av_unc = fore_Av * np.sqrt(
         (forehi_unc / forehi) ** 2
         + (memod.fore_Rv.prior[1] / memod.fore_Rv.prior[0]) ** 2
         + (fore_nhiebv_unc / fore_nhiebv) ** 2
     )
     memod.fore_Av.value = fore_Av
     memod.fore_Av.prior = (fore_Av, fore_Av_unc)
+    print(memod.fore_Av.prior)
+    exit()
     memod.logHI_MW.fixed = True
     memod.vel_MW.fixed = True
 
