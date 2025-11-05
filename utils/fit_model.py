@@ -230,8 +230,6 @@ def main():
     )
     memod.fore_Av.value = fore_Av
     memod.fore_Av.prior = (fore_Av, fore_Av_unc)
-    print(memod.fore_Av.prior)
-    exit()
     memod.logHI_MW.fixed = True
     memod.vel_MW.fixed = True
 
