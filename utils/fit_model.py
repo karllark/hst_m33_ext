@@ -327,6 +327,7 @@ def main():
             "RV": (fitmod2.Rv.value, fitmod2.Rv.unc),
         }
 
+        fitmod2.fore_sampling = False
         fitmod2.plot(reddened_star, modinfo, resid_range=resid_range, lyaplot=lyaplot)
         plt.savefig(f"{outname}_mcmc.pdf")
         plt.savefig(f"{outname}_mcmc.png")
