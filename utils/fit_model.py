@@ -62,6 +62,11 @@ def fit_model_parser():
         action="store_true",
     )
     parser.add_argument(
+        "--mcmc_restart",
+        help="restart MCMC fitting from previous MCMC p50 parameters",
+        action="store_true",
+    )
+    parser.add_argument(
         "--showfit", help="display the best fit model plot", action="store_true"
     )
     return parser
@@ -281,28 +286,45 @@ def main():
     # plt.show()
     # exit()
 
-    start_time = time.time()
-    print("starting fitting")
+    if not args.mcmc_restart:
+        start_time = time.time()
+        print("starting fitting")
 
-    fitmod, result = memod.fit_minimizer(reddened_star, modinfo, maxiter=10000)
+        fitmod, result = memod.fit_minimizer(reddened_star, modinfo, maxiter=10000)
 
-    print("finished fitting")
-    print("--- %s seconds ---" % (time.time() - start_time))
-    # check the fit output
-    print(result["message"])
+        print("finished fitting")
+        print("--- %s seconds ---" % (time.time() - start_time))
+        # check the fit output
+        print(result["message"])
 
-    print("best parameters")
-    fitmod.pprint_parameters()
-    fit_params["MIN"] = fitmod.save_parameters()
+        print("best parameters")
+        fitmod.pprint_parameters()
+        fit_params["MIN"] = fitmod.save_parameters()
 
-    dust_columns = {"AV": (fitmod.Av.value, 0.0), "RV": (fitmod.Rv.value, 0.0)}
+        dust_columns = {"AV": (fitmod.Av.value, 0.0), "RV": (fitmod.Rv.value, 0.0)}
 
-    fitmod.plot(reddened_star, modinfo, resid_range=resid_range, lyaplot=lyaplot)
-    plt.savefig(f"{outname}_minimizer.pdf")
-    plt.savefig(f"{outname}_minimizer.png")
-    plt.close()
+        fitmod.plot(reddened_star, modinfo, resid_range=resid_range, lyaplot=lyaplot)
+        plt.savefig(f"{outname}_minimizer.pdf")
+        plt.savefig(f"{outname}_minimizer.png")
+        plt.close()
 
     if args.mcmc:
+
+        # use the resutls from a previous MCMC run to start the MCMC fitting
+        # use the p50 fit parameters and then proceed like the optimization step was run
+        if args.mcmc_restart:
+            fitmod = memod
+            cfile = f"exts/{args.starname}_mefit_ext.fits"
+            edata = ExtData(filename=cfile)
+            fdata = edata.fit_params["MCMC"]
+            for cparam in fitmod.paramnames:
+                eindx = np.where(fdata["name"] == cparam)[0]
+                cparam = getattr(fitmod, cparam)
+                cparam.value = (fdata["value"][eindx])[0]
+
+            print("starting with MCMC p50 parameters")
+            fitmod.pprint_parameters()
+
         fitmod.fore_sampling = True
 
         print("starting sampling")
