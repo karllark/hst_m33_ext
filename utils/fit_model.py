@@ -127,22 +127,41 @@ def main():
                                   + glob.glob(f"{args.modpath}/tlusty_z10*.dat")
                                   + glob.glob(f"{args.modpath}/tlusty_z20*.dat"))
         # fmt: on
-        tlusty_models = [
-            tfile[tfile.rfind("/") + 1 : len(tfile)] for tfile in tlusty_models_fullpath
-        ]
-        if len(tlusty_models) > 1:
-            print(f"{len(tlusty_models)} model files found.")
-        else:
-            raise ValueError("no model files found.")
 
-        # get the models with just the reddened star band data and spectra
-        modinfo = ModelData(
-            tlusty_models,
-            path=f"{args.modpath}/",
-            band_names=band_names,
-            spectra_names=data_names,
-        )
-        pickle.dump(modinfo, open(f"{modstr}_modinfo.p", "wb"))
+        # separately do the regular and continuum only files
+        #   continuum only files used for a visualization
+        contfiles = []
+        regfiles = []
+        for cfile in tlusty_models_fullpath:
+            if "cont" in cfile:
+                contfiles.append(cfile)
+            else:
+                regfiles.append(cfile)
+
+        for mtype in ["", "cont"]:
+
+            if mtype == "cont":
+                tlusty_models_fullpath = contfiles
+            else:
+                tlusty_models_fullpath = regfiles
+            #tlusty_models_fullpath = glob.glob(f"{modpath}/{modstr}*{mtype}.dat")
+            tlusty_models = [
+                tfile[tfile.rfind("/") + 1 : len(tfile)] for tfile in tlusty_models_fullpath
+            ]
+            if len(tlusty_models) > 1:
+                print(f"{len(tlusty_models)} {mtype} model files found.")
+            else:
+                raise ValueError("no model files found.")
+
+            # get the models with just the reddened star band data and spectra
+            modinfo = ModelData(
+                tlusty_models,
+                path=f"{args.modpath}/",
+                band_names=None,
+                spectra_names=data_names,
+            )
+            pickle.dump(modinfo, open(f"{modstr}{mtype}modinfo.p", "wb"))
+
     print("finished reading model files")
     print("--- %s seconds ---" % (time.time() - start_time))
 
