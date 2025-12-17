@@ -42,7 +42,7 @@ def fit_model_parser():
     parser.add_argument(
         "--modstr",
         help="Alternative model string for grid (expert)",
-        default="",
+        default=None,
     )
     parser.add_argument(
         "--picmodel",
@@ -118,7 +118,7 @@ def main():
     if args.modstr is not None:
         modstr = args.modstr
     if args.picmodel:
-        modinfo = pickle.load(open(f"{modstr}_modinfo.p", "rb"))
+        modinfo = pickle.load(open(f"{modstr}modinfo.p", "rb"))
     else:
         # tlusty_models_fullpath = glob.glob(f"{args.modpath}/{modstr}*.dat")
         # fmt: off
